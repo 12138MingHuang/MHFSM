@@ -301,9 +301,44 @@ namespace MHFSM
 
         }
 
-        public void RefreshStateScripts()
+        /// <summary>
+        /// 刷新状态脚本信息。如果脚本不存在，则移除该脚本。如果有新的脚本被添加到项目中，则需要手动调用此方法更新脚本信息。
+        /// </summary>
+        /// <param name="controller"></param>
+        public void RefreshStateScripts(RuntimeFSMController controller)
         {
+            List<FSMStateScriptInfo> invalid = new List<FSMStateScriptInfo>();
+
+            foreach (FSMStateScriptInfo scriptInfo in StateScripts)
+            {
+                if(string.IsNullOrEmpty(scriptInfo.guid) && !string.IsNullOrEmpty(scriptInfo.className))
+                    scriptInfo.guid = AssemblyTool.GetGUIDByStateClassFullName(scriptInfo.className);
+                
+                string path = AssetDatabase.GUIDToAssetPath(scriptInfo.guid);
+                if (string.IsNullOrEmpty(path))
+                {
+                    invalid.Add(scriptInfo);
+                    continue;
+                }
+                MonoScript script = AssetDatabase.LoadAssetAtPath<MonoScript>(path);
+                if(script == null)
+                    continue;
+                
+                Type scriptType = script.GetClass();
+                if(scriptType == null)
+                    continue;
+                
+                scriptInfo.className = scriptType.FullName;
+            }
             
+            // 移除无效脚本
+            foreach (FSMStateScriptInfo info in invalid)
+            {
+                StateScripts.Remove(info);
+            }
+            
+            if(controller != null)
+                controller.Save();
         }
 
         /// <summary>
