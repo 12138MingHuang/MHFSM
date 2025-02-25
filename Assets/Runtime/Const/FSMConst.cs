@@ -20,7 +20,7 @@
         /// <summary>
         /// 状态节点宽度
         /// </summary>
-        public const int StateNodeWith = 200;
+        public const int StateNodeWidth = 200;
         
         /// <summary>
         /// 状态节点高度
