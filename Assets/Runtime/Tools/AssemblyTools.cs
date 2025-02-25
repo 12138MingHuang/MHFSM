@@ -77,7 +77,7 @@ namespace MHFSM
         /// </summary>
         /// <param name="fullName"> 状态脚本全名称 </param>
         /// <returns> 脚本guid </returns>
-        public static string GetGUIDByStateClassFullNmae(string fullName)
+        public static string GetGUIDByStateClassFullName(string fullName)
         {
             List<MonoScript> scripts = GetAllStatesType();
 
