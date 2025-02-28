@@ -1,8 +1,7 @@
-﻿using MHFSM;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Runtime
+namespace MHFSM
 {
     /// <summary>
     /// 状态之间的过渡

@@ -189,6 +189,28 @@ namespace MHFSM
         }
         
         #endregion
+        
+        /// <summary>
+        /// 比较父节点是否相同。如果父节点为空，则认为是顶层状态。
+        /// </summary>
+        /// <param name="node"> 另一个状态节点 </param>
+        /// <returns> 是否相同 </returns>
+        public bool CompareParent(FSMStateNodeData node) 
+        {
+            if (BaseLayer() && node.BaseLayer()) return true;
+
+            if(parents == null || node.parents == null) return false;
+
+            if (node.parents.Count != parents.Count) return false;
+
+            for (int i = 0; i < parents.Count; i++) 
+            {
+                if (!parents[i].Equals(node.parents[i]))
+                    return false;
+            }
+    
+            return true;
+        }
 
         /// <summary>
         /// 比较父节点是否相同。如果父节点为空，则认为是顶层状态。
