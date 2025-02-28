@@ -82,7 +82,7 @@ namespace Runtime
         }
     }
 
-    public class FSMCondtionGroup
+    public class FSMConditionGroup
     {
         private List<FSMCondition> _conditions = new List<FSMCondition>();
         public Action onConditionMeet;
@@ -118,7 +118,7 @@ namespace Runtime
         private RuntimeFSMControllerInstance _controller;
         private FSMTransitionData _transition;
 
-        public FSMCondtionGroup(RuntimeFSMControllerInstance controller, List<FSMConditionData> conditions, FSMTransitionData transition)
+        public FSMConditionGroup(RuntimeFSMControllerInstance controller, List<FSMConditionData> conditions, FSMTransitionData transition)
         {
             _controller = controller;
             _transition = transition;
