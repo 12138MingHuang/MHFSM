@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -385,14 +387,109 @@ namespace MHFSM
             UpdateTrigger();
         }
 
-        private void AddStateCount(string dataName)
+        public void LateUpdate()
         {
+            currentStatesList.Clear();
             
+            foreach (string statesKey in _currentStates.Keys)
+            {
+                if (_currentStates[statesKey] == null) continue;
+
+                currentStatesList.Add(_currentStates[statesKey]);
+            }
+
+            foreach (FSMStateNode stateNode in currentStatesList)
+            {
+                if (!stateNode.isRunning) continue;
+                
+                stateNode.OnLateUpdate();
+            }
         }
 
-        private void ResetParameter()
+        public void FixedUpdate()
         {
+            currentStatesList.Clear();
             
+            foreach (string statesKey in _currentStates.Keys)
+            {
+                if (_currentStates[statesKey] == null) continue;
+
+                currentStatesList.Add(_currentStates[statesKey]);
+            }
+
+            foreach (FSMStateNode stateNode in currentStatesList)
+            {
+                if (!stateNode.isRunning) continue;
+                
+                stateNode.OnFixedUpdate();
+            }
+        }
+
+        /// <summary>
+        /// 添加计数器,用于检测状态频繁切换问题
+        /// </summary>
+        /// <param name="stateName"> 状态名称</param>
+        /// <exception cref="SystemException"> 状态频繁切换异常</exception>
+        private void AddStateCount(string stateName)
+        {
+            if(!stateCount.TryAdd(stateName, 0))
+                stateCount[stateName]++;
+
+            if (stateCount[stateName] > 30)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append("游戏物体:").Append(FSMController.gameObject.name);
+                    .Append("状态机:")..Append(this.runtimeFSMController.name).Append("检测到状态:");
+
+                foreach (string key in stateCount.Keys)
+                {
+                    if (stateCount[key] >= 29)
+                        sb.Append(key).Append(",");
+                }
+
+                sb.Remove(sb.Length - 1, 1);
+                sb.Append("之间频繁切换,请检查状态之间的过渡是否同时满足?请设置合理的状态切换条件!");
+                stateCount.Clear();
+                throw new SystemException(sb.ToString());
+            }
+        }
+
+        private void UpdateTrigger()
+        {
+            foreach (int key in triggerCount.Keys)
+            {
+                if(!triggerKeys.Contains(key))
+                    triggerKeys.Add(key);
+            }
+
+            foreach (int key in triggerKeys)
+            {
+                if(!triggerCount.ContainsKey(key))
+                    continue;
+
+                if (triggerCount[key] > 0 && GetParameter(key) == 0)
+                {
+                    SetParameter(key, 1,ParameterType.Trigger);
+                    triggerCount[key]--;
+
+                    if (triggerCount[key] < 0)
+                        triggerCount[key] = 0;
+                }
+            }
+        }
+
+        public FSMStateNode GetCurrentState(string parent)
+        {
+            return _currentStates.GetValueOrDefault(parent);
+        }
+
+        internal void ResetParameter()
+        {
+            foreach (int defaultKey in parameterDefault.Keys)
+            {
+                if (parameters.TryGetValue(defaultKey, out FSMParameterData parameterData))
+                    parameterData.value = parameterDefault[defaultKey];
+            }
         }
     }
 }
