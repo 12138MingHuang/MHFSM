@@ -681,15 +681,27 @@ namespace MHFSM
         #endregion
         
         #region StringToHash
+
+        private static Dictionary<string, int> stringHashs = new Dictionary<string, int>();
+        private static Dictionary<int, string> hashStrings = new Dictionary<int, string>();
         
-        public static int StringToHash(string s)
+        public static int StringToHash(string eventName)
         {
-            throw new NotImplementedException();
+            if(stringHashs.TryGetValue(eventName, out int toHash)) return toHash;
+            
+            int hash = Animator.StringToHash(eventName);
+            stringHashs.Add(eventName, hash);
+            
+            hashStrings.TryAdd(hash, eventName);
+
+            return stringHashs[eventName];
         }
         
         internal static string HashToString(int hash)
         {
-            throw new NotImplementedException();
+            if (hashStrings.TryGetValue(hash, out string toString)) return toString;
+            
+            return string.Empty;
         }
         
         #endregion

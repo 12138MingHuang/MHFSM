@@ -37,7 +37,7 @@ namespace MHFSM
                     return false;
                 }
 
-                FSMStateNodeData from = _controller.RuntimrFSMController.GetStateNodeData(_data.fromStateName);
+                FSMStateNodeData from = _controller.runtimeFSMController.GetStateNodeData(_data.fromStateName);
                 string parent = from.Parent;
                 FSMStateNode currentState = _controller.GetCurrentState(parent);
 

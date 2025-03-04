@@ -42,9 +42,15 @@ namespace MHFSM
         public FSMCondition(FSMConditionData data, RuntimeFSMControllerInstance controller)
         {
             _data = data;
-            // TODO: 参数名hash冲突问题
-            int parameterNameHash;
+            int parameterNameHash = FSMController.StringToHash(data.parameterName);
             
+            if(controller.parameters.TryGetValue(parameterNameHash, out FSMParameterData parameter))
+                _parameter = parameter;
+
+            if (_parameter != null)
+                _parameter.onValueChange += CheckParameterValueChange;
+            
+            CheckParameterValueChange();
         }
 
         /// <summary>
@@ -142,7 +148,7 @@ namespace MHFSM
             {
                 if (condition.Parameter.parameterType == ParameterType.Trigger)
                 {
-                    // TODO: 重置触发器
+                    _controller.ClearTrigger(condition.Parameter.nameHash);
                 }
             }
         }

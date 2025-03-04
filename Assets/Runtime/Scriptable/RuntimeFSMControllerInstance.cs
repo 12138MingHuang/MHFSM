@@ -93,7 +93,7 @@ namespace MHFSM
             if(runtimeFSMController == null) return;
             name = runtimeFSMController.name;
             // 默认不执行任何状态
-            currentStates.Clear();
+            _currentStates.Clear();
 
             this.runtimeFSMController = GameObject.Instantiate(runtimeFSMController);
 #if UNITY_EDITOR
@@ -438,8 +438,8 @@ namespace MHFSM
             if (stateCount[stateName] > 30)
             {
                 StringBuilder sb = new StringBuilder();
-                sb.Append("游戏物体:").Append(FSMController.gameObject.name);
-                    .Append("状态机:")..Append(this.runtimeFSMController.name).Append("检测到状态:");
+                sb.Append("游戏物体:").Append(FSMController.gameObject.name)
+                    .Append("状态机:").Append(this.runtimeFSMController.name).Append("检测到状态:");
 
                 foreach (string key in stateCount.Keys)
                 {
