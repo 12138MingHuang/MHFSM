@@ -49,7 +49,7 @@ namespace MHFSM
             return $"{name}.{suffix}";
         }
 
-        [MenuItem("Window/MHFSM/FSMController")]
+        [MenuItem("Window/MHFSM/FSMControllerWindow")]
         static void StateMachineWindow()
         {
             FSMEditorWindow window = EditorWindow.GetWindow<FSMEditorWindow>(); 

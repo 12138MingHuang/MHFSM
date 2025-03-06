@@ -200,7 +200,7 @@ namespace MHFSM
         {
             if (_reorderableListStates == null)
             {
-                _reorderableListStates = new ReorderableList(Context.Instance.RuntimeFSMControllers, typeof(FSMParameterData), false, true, false, false);
+                _reorderableListStates = new ReorderableList(Context.Instance.RuntimeFSMControllers, typeof(RuntimeFSMController), false, true, false, false);
                 _reorderableListStates.headerHeight = 0;
                 
                 _reorderableListStates.drawElementCallback += DrawStateElementCallback;

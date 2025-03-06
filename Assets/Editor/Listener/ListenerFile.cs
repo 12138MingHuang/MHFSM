@@ -6,6 +6,7 @@ namespace MHFSM
 {
     public class ListenerFile
     {
+        [InitializeOnLoadMethod]
         private static void InitOnLoad()
         {
             Selection.selectionChanged += OnSelectionChange;
