@@ -13,7 +13,7 @@ namespace MHFSM
             {
                 string message = $"状态:{toNode.DisplayName}不能添加过渡!";
                 Debug.LogError(message);
-                // TODO: 窗口抛出异常
+                FSMEditorWindow.ShowNotification(message);
                 return;
             }
             
@@ -26,7 +26,7 @@ namespace MHFSM
                 {
                     string message = $"过渡 {fromStateName} -> {toStateName} 已存在,请勿重复添加!";
                     Debug.LogError(message);
-                    // TODO: 窗口抛出异常
+                    FSMEditorWindow.ShowNotification(message);
                     return;
                 }
             }

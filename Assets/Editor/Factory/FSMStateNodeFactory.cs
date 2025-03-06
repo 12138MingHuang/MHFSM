@@ -26,7 +26,7 @@ namespace MHFSM
             {
                 string message = $"创建状态节点失败,名称:{name}重复";
                 Debug.LogError(message);
-                // TODO: 弹出提示
+                FSMEditorWindow.ShowNotification(message);
                 return null;
             }
             
@@ -88,7 +88,7 @@ namespace MHFSM
                 {
                     string message = $"状态:{stateNodeData.DisplayName}不能删除!";
                     Debug.LogError(message);
-                    // TODO: 弹出提示
+                    FSMEditorWindow.ShowNotification(message);
                     return;
                 }
             }
@@ -148,14 +148,14 @@ namespace MHFSM
 
             if (string.IsNullOrEmpty(newName))
             {
-                // TODO: 弹出提示
+                FSMEditorWindow.ShowNotification("名称不能为空!");
                 return false;
             }
 
             if (controller.GetStateNodeData(newName) != null)
             {
                 string message = $"状态重命名失败,名称:{newName}已经存在,请使用其他的名称!";
-                // TODO: 弹出提示
+                FSMEditorWindow.ShowNotification(message);
                 return false;
             }
 

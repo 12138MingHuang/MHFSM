@@ -52,13 +52,20 @@ namespace MHFSM
         [MenuItem("Window/MHFSM/FSMController")]
         static void StateMachineWindow()
         {
-            // TODO: 创建窗口
+            FSMEditorWindow window = EditorWindow.GetWindow<FSMEditorWindow>(); 
+            window.Show();
         }
 
         [MenuItem("Assets/Create/MHFSM/FSMState")]
         static void CreateFSMState()
         {
-            // TODO: 创建FSMState
+            FSMStateCreator stateCreator = ScriptableObject.CreateInstance<FSMStateCreator>();
+
+            string fileName = GetName("NewState", "cs");
+
+            GUIContent content = EditorGUIUtility.IconContent("icons/processed/cs script icon.asset");
+             
+            ProjectWindowUtil.StartNameEditingIfProjectWindowExists(stateCreator.GetInstanceID(), stateCreator, fileName, (Texture2D)content.image, string.Empty);
         }
 
         [MenuItem("Window/MHFSM/About", false, 5000)]

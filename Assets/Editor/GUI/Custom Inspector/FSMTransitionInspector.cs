@@ -77,8 +77,7 @@ namespace MHFSM
                 if (EditorGUI.DropdownButton(_conditionLeftRect, new GUIContent(conditionData.parameterName), FocusType.Keyboard))
                 {
                     _popRect.Set(rect.x, rect.y + 2, rect.width / 2, rect.height);
-                    // TODO: 弹出窗口选择参数
-                    // PopupWindow.Show(_popRect, new);
+                    PopupWindow.Show(_popRect, new FSMSelectParamWindow(rect.width / 2, conditionData, helper.controller));
                 }
             }
 

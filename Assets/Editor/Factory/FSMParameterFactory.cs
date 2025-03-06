@@ -97,7 +97,7 @@ namespace MHFSM
         {
             if (string.IsNullOrEmpty(newName))
             {
-                // TODO: 弹出提示
+                FSMEditorWindow.ShowNotification("参数名称不能为空!");
                 Debug.LogError("参数名称不能为空!");
                 return;
             }
@@ -105,7 +105,7 @@ namespace MHFSM
             if (controller.GetParameterData(newName) != null)
             {
                 
-                // TODO: 弹出提示
+                FSMEditorWindow.ShowNotification("参数名称不能为空!");
                 Debug.LogError("参数名称已存在!");
                 return;
             }
