@@ -1,0 +1,19 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using MHFSM;
+
+public class {0} : FSMState
+{
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        Debug.Log("{0} OnEnter");
+    }
+
+    public override void OnExit()
+    {
+        base.OnExit();
+        Debug.Log("{0} OnExit");
+    } 
+}

@@ -112,7 +112,7 @@ namespace MHFSM
                 data.nameHash = nameHash;
                 data.onValueChange = null;
                 parameters.Add(nameHash, data);
-                parameterDefault.Add(nameHash, data.value);
+                parameterDefault.Add(nameHash, data.Value);
             }
             
             states.Clear();
@@ -340,7 +340,7 @@ namespace MHFSM
         {
             FSMParameterData parameterData;
             if(parameters.TryGetValue(name, out parameterData))
-                return parameterData.value;
+                return parameterData.Value;
             
             return 0;
         }
@@ -488,7 +488,7 @@ namespace MHFSM
             foreach (int defaultKey in parameterDefault.Keys)
             {
                 if (parameters.TryGetValue(defaultKey, out FSMParameterData parameterData))
-                    parameterData.value = parameterDefault[defaultKey];
+                    parameterData.Value = parameterDefault[defaultKey];
             }
         }
     }
