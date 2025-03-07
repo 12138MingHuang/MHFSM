@@ -80,7 +80,7 @@ namespace MHFSM
                 GUILayout.FlexibleSpace();
                 GUILayout.BeginVertical();
                 GUILayout.Space(5);
-                if (GUILayout.Button(EditorGUIUtility.IconContent("d_Menu"), _ddHeaderStyle, GUILayout.Width(25), GUILayout.Height(20)))
+                if (GUILayout.Button(EditorGUIUtility.IconContent("d_MoreOptions"), _ddHeaderStyle, GUILayout.Width(25), GUILayout.Height(20)))
                 {
                     ShowMenu(script);
                 }

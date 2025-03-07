@@ -27,11 +27,11 @@ namespace MHFSM
         private List<RuntimeFSMController> _runtimeFSMControllers = new List<RuntimeFSMController>();
         [SerializeField]
         private List<RuntimeFSMControllerLayer> _runtimeFSMControllerLayers = new List<RuntimeFSMControllerLayer>();
-        [SerializeField]
+
         private List<RuntimeFSMControllerInstance> _runtimeFSMControllerInstances = new List<RuntimeFSMControllerInstance>();
-        [SerializeField]
+
         private List<RuntimeFSMController> _runtimeFSMControllerList = new List<RuntimeFSMController>();
-        [SerializeField]
+
         private List<RuntimeFSMControllerLayer> _runtimeFSMControllerLayerList = new List<RuntimeFSMControllerLayer>();
 
         internal object userData;

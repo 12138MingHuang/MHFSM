@@ -8,7 +8,7 @@ namespace MHFSM
     [CustomEditor(typeof(FSMController))]
     public class FSMControllerInspector : Editor
     {
-        private FSMController _controller;
+        private FSMController _controller => target as FSMController;
 
         private SerializedProperty _script = null;
         private SerializedProperty _resetOnDisable = null;
@@ -20,10 +20,11 @@ namespace MHFSM
 
         private void OnEnable()
         {
+            if (target == null) return;
             _script = serializedObject.FindProperty("m_Script");
-            _resetOnDisable = serializedObject.FindProperty("resetOnDisable");
-            _runtimeFSMController = serializedObject.FindProperty("_runtimeFSMControllerLayer");
-            _runtimeFSMControllerLayer = serializedObject.FindProperty("_runtimeFSMController");
+            _resetOnDisable = serializedObject.FindProperty("_resetOnDisable");
+            _runtimeFSMController = serializedObject.FindProperty("_runtimeFSMControllers");
+            _runtimeFSMControllerLayer = serializedObject.FindProperty("_runtimeFSMControllerLayers");
         }
 
         public override void OnInspectorGUI()
