@@ -17,7 +17,7 @@ namespace MHFSM
         #region 字段
         
         public string name;
-        public float value;
+        private float _value;
         public ParameterType parameterType;
         public Action onValueChange;
         public int nameHash;
@@ -26,12 +26,12 @@ namespace MHFSM
 
         public float Value
         {
-            get { return value; }
+            get { return _value; }
             set
             {
-                if(Mathf.Approximately(this.value, value)) return;
+                if(Mathf.Approximately(_value, value)) return;
 
-                this.value = value;
+                _value = value;
                 onValueChange?.Invoke();
             }
         }

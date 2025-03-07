@@ -292,7 +292,7 @@ namespace MHFSM
             {
                 if (parameterData.parameterType != ParameterType.Trigger) return;
 
-                if (Mathf.Approximately(parameterData.value, 1))
+                if (Mathf.Approximately(parameterData.Value, 1))
                 {
                     if (!triggerCount.TryAdd(name, 1))
                         triggerCount[name]++;
@@ -327,7 +327,7 @@ namespace MHFSM
             if(parameters.TryGetValue(name, out parameterData))
             {
                 if (parameterData.parameterType == type)
-                    parameterData.value = value;
+                    parameterData.Value = value;
             }
         }
 

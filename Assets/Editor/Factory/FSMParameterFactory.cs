@@ -17,7 +17,7 @@ namespace MHFSM
             FSMParameterData parameterData = new FSMParameterData();
             parameterData.name = GetDefaultName(controller, type);
             parameterData.parameterType = type;
-            parameterData.value = 0;
+            parameterData.Value = 0;
             
             controller.AddParameters(parameterData);
         }
